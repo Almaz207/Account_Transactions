@@ -5,9 +5,9 @@ def return_list_transactions():
     with open ('operations.json', 'rt', encoding='utf-8') as file:
         return json.load(file)
 
-def returns_executed_transactions(selection_list):
+def returns_executed_transactions(list_transactions):
     executed_list = []
-    for transaction in selection_list:
+    for transaction in list_transactions:
         if len(transaction) == 0:
              continue
         else:
@@ -17,12 +17,12 @@ def returns_executed_transactions(selection_list):
     return executed_list
 
 
-def returns_list_last_transactions(list_transactions):
-    for transaction in list_transactions:
+def returns_list_last_transactions(executed_list):
+    for transaction in executed_list:
         new_date = datetime.fromisoformat(transaction['date'])
         transaction['date'] = new_date
-    executed_list =sorted(list_transactions, key=lambda x: x['date'],reverse=True)
-    return executed_list[0:5]
+    sorted_list =sorted(executed_list, key=lambda x: x['date'],reverse=True)
+    return sorted_list[0:5]
 
 
 list_transactions=return_list_transactions()
