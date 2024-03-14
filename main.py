@@ -3,11 +3,13 @@ from datetime import datetime
 
 
 def return_list_transactions():
+"""Функция возвращает данные из Json формата"""
     with open('operations.json', 'rt', encoding='utf-8') as file:
         return json.load(file)
 
 
 def returns_executed_transactions(list_transactions):
+"""Функция возвращает список всех операций со статусом'EXECUTED' и исключает некорректные данные по транзакциям"""
     executed_list = []
     for transaction in list_transactions:
         if len(transaction) == 0:
@@ -20,6 +22,7 @@ def returns_executed_transactions(list_transactions):
 
 
 def returns_list_last_transactions(executed_list):
+"""Функция возвращает 5 последних,по времени, транзакций """
     for transaction in executed_list:
         new_date = datetime.fromisoformat(transaction['date'])
         transaction['date'] = new_date
